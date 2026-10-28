@@ -1,0 +1,10 @@
+import type * as AsyncResult from "effect/reactivity/AsyncResult";
+import * as Atom from "effect/reactivity/Atom";
+import type { Binding, OptionalBinding } from "../atom/FeatureAtom.ts";
+import type * as Feature from "../Feature.ts";
+import * as Store from "../Store.ts";
+import { StoreError } from "../StoreError.ts";
+export declare const SessionTypeId: unique symbol;
+export type Session<S, A, E> = Atom.Atom<AsyncResult.AsyncResult<Store.Store<S, A>, E | StoreError>>;
+export declare const makeBinding: <S, A, E>(session: Session<S, A, E>) => Binding<S, A, E>;
+export declare const scopeBinding: <S, A, E, CS, CA>(binding: Binding<S, A, E>, focus: Feature.Focus<S, A, CS, CA, "Child"> | Feature.Focus<S, A, CS, CA, "OptionalChild">) => Binding<CS, CA, E> | OptionalBinding<CS, CA, E>;
